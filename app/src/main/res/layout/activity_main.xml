@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/anasayfa">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Merhaba"
+        app:layout_constraintWidth_percent=".5"
+        app:layout_constraintHeight_percent=".09"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#100740"
+        android:id="@+id/textHello"
+        android:autoSizeTextType="uniform"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="#100740"
+        android:text="Krank Rent Araç Kiralama Sistemi"
+        app:layout_constraintWidth_percent=".5"
+        app:layout_constraintHeight_percent=".03"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintTop_toBottomOf="@id/textHello"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnGiris"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="200dp"
+        android:textSize="15sp"
+        android:backgroundTint="@color/themeColor"
+        android:text="Giriş Yap"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent=".058"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/mybutton"
+        app:layout_constraintWidth_percent=".75"
+        android:onClick="anaSayfaGirisYap"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnKayit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:background="@drawable/mybutton"
+        android:text="Kayıt Ol"
+        android:textAllCaps="false"
+        app:layout_constraintHeight_percent=".058"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGiris"
+        android:textColor="@color/themeColor"
+        app:layout_constraintWidth_percent=".75"
+        android:onClick="kayitOl"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

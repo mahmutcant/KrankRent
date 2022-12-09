@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginAfterMain"
+    android:id="@+id/my_drawer_layout"
+    tools:viewBindingIgnore="true"
+    android:background="@drawable/anasayfa">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent=".85"
+        app:layout_constraintHeight_percent=".9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/editTextColor">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:id="@+id/adVer"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/themeColor"
+            />
+        <TextView
+            android:id="@+id/lblAracListesi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/themeColor"
+            />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:id="@+id/LstAraclar"
+            android:layout_marginBottom="50dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="40dp"
+            android:text="Çıkış Yap"
+            android:textSize="30sp"
+            android:onClick="cikisYap"
+            />
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_centerHorizontal="true" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
