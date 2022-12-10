@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,12 +40,20 @@ public class LoginAfterMain extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
+    private ImageView menuIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_after_main);
         lstAraclar = (ListView)findViewById(R.id.LstAraclar);
         lblAracListesi = (TextView)findViewById(R.id.lblAracListesi);
+        menuIcon = (ImageView)findViewById(R.id.menuIcon);
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginAfterMain.this, "Menu Açılacak", Toast.LENGTH_SHORT).show();
+            }
+        });
         adVer = (TextView)findViewById(R.id.adVer);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();

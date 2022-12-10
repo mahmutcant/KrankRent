@@ -64,5 +64,6 @@ public class LoginPage extends AppCompatActivity {
 
     public void girisIptal(View v){
         finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
