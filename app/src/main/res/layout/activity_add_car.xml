@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anasayfa"
+    tools:context=".AddCar">
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".8">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:text="Lütfen Tüm Alanları Eksiksiz Doldurun"
+            android:textAlignment="center"
+            android:textColor="@color/themeColor"
+            android:textSize="7pt" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="80dp"
+            android:text="Marka"
+            android:textColor="@color/themeColor" />
+        <Spinner
+            android:id="@+id/cmbAracMarka"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/editTextColor" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="150dp"
+            android:text="Model"
+            android:textColor="@color/themeColor" />
+        <Spinner
+            android:id="@+id/cmbAracModel"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/editTextColor" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="230dp"
+            android:text="Model Yılı"
+            android:textColor="@color/themeColor" />
+        <EditText
+            android:id="@+id/aracModelYili"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="260dp"
+            android:inputType="number"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/editTextColor"
+            android:textColor="@color/themeColor"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="300dp"
+            android:text="Günlük Kira Bedeli"
+            android:textColor="@color/themeColor" />
+        <EditText
+            android:id="@+id/aracKiraBedeli"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="320dp"
+            android:layout_marginRight="20dp"
+            android:inputType="number"
+            android:backgroundTint="@color/editTextColor"
+            android:textColor="@color/themeColor"/>
+        <CheckBox
+            android:id="@+id/aracKonumdaMi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Araç Bulunduğunuz Şehirde Mi ? "
+            android:layout_marginTop="360dp"
+            android:background="@color/editTextColor"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/themeColor" />
+        <TextView
+            android:id="@+id/txtAracinSehri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="395dp"
+            android:text="Aracın Bulunduğu Şehir"
+            android:textColor="@color/themeColor" />
+        <Spinner
+            android:id="@+id/cmbAracEkleSehir"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="420dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/editTextColor" />
+        <Button
+            android:id="@+id/aracKaydet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            android:textColor="@color/editTextColor"
+            android:text="Aracı Kaydet"
+            android:background="@drawable/mybutton"
+            android:onClick="araciKaydet"
+            android:backgroundTint="@color/themeColor"/>
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:text="Temizle"
+            android:textColor="@color/themeColor"
+            android:background="@drawable/mybutton"
+            android:backgroundTint="@color/editTextColor"/>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

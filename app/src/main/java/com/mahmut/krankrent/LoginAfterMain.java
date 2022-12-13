@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.collection.LLRBNode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,18 +43,47 @@ public class LoginAfterMain extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
-    private ImageView menuIcon;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_after_main);
         lstAraclar = (ListView)findViewById(R.id.LstAraclar);
         lblAracListesi = (TextView)findViewById(R.id.lblAracListesi);
-        menuIcon = (ImageView)findViewById(R.id.menuIcon);
-        menuIcon.setOnClickListener(new View.OnClickListener() {
+        anaSayfa = (ImageView)findViewById(R.id.iconMainPage);
+        profileIcon = (ImageView)findViewById(R.id.profileIcon);
+        addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
+        arabaDuzenle = (ImageView)findViewById(R.id.arabaDuzenle);
+        iconCikis = (ImageView)findViewById(R.id.iconCikis);
+        anaSayfa.setVisibility(View.INVISIBLE);
+        profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginAfterMain.this, "Menu Açılacak", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginAfterMain.this, ProfilePage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        addCarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAfterMain.this, AddCar.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        arabaDuzenle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAfterMain.this, EditCar.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        iconCikis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(LoginAfterMain.this, LoginPage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });
         adVer = (TextView)findViewById(R.id.adVer);
@@ -69,7 +101,6 @@ public class LoginAfterMain extends AppCompatActivity {
                 adVer.setText(upperString);
                 lblAracListesi.setText(snapshot.child("Sehir").getValue().toString() + " Konumundaki Araçların Listesi");
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

@@ -21,27 +21,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TEKRAR"
-            android:textSize="25sp"
-            android:textAlignment="center"
-            android:textColor="@color/themeColor"
-            android:layout_gravity="center"
-            android:layout_marginBottom="165dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="HOŞGELDİNİZ"
             android:textSize="30sp"
             android:textAlignment="center"
             android:textColor="@color/themeColor"
             android:layout_gravity="center"
-            android:layout_marginBottom="130dp"
+            android:layout_marginBottom="150dp"
             />
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:hint="E-posta"
             android:background="@drawable/mybutton"
             android:textColorHint="@color/themeColor"
@@ -55,7 +45,7 @@
         <EditText
             android:id="@+id/editSifre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:hint="Şifre"
             android:inputType="textPassword"
             android:background="@drawable/mybutton"

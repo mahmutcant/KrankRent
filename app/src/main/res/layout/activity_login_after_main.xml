@@ -8,7 +8,6 @@
     android:id="@+id/my_drawer_layout"
     tools:viewBindingIgnore="true"
     android:background="@drawable/anasayfa">
-
     <include
         android:id="@+id/include"
         layout="@layout/toolbar" />
@@ -22,7 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include"
         app:layout_constraintWidth_percent=".85">
-
         <TextView
             android:id="@+id/adVer"
             android:layout_width="match_parent"
@@ -31,7 +29,6 @@
             android:textAlignment="center"
             android:textColor="@color/themeColor"
             android:textSize="25sp" />
-
         <TextView
             android:id="@+id/lblAracListesi"
             android:layout_width="match_parent"
@@ -40,23 +37,12 @@
             android:textAlignment="center"
             android:textColor="@color/themeColor"
             android:textSize="15sp" />
-
         <ListView
             android:id="@+id/LstAraclar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="50dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="40dp"
-            android:onClick="cikisYap"
-            android:text="Çıkış Yap"
-            android:textSize="30sp" />
-
         <ProgressBar
             android:id="@+id/progressBar1"
             style="?android:attr/progressBarPadding"

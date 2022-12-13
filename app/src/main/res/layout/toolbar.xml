@@ -7,22 +7,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="Krank Rent"
-            android:layout_centerVertical="true"
-            android:textColor="@color/editTextColor"
-            android:textSize="11pt" />
-
         <ImageView
-            android:id="@+id/menuIcon"
+            android:id="@+id/profileIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_menu_24" />
-
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/iconMainPage"
+            android:src="@drawable/ic_baseline_person_24" />
+        <ImageView
+            android:id="@+id/addCarIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/profileIcon"
+            android:src="@drawable/ic_baseline_add_24" />
+        <ImageView
+            android:id="@+id/arabaDuzenle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/addCarIcon"
+            android:src="@drawable/ic_baseline_directions_car_24" />
+        <ImageView
+            android:id="@+id/iconCikis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="100dp"
+            android:layout_toEndOf="@id/arabaDuzenle"
+            android:src="@drawable/ic_emergency_exit_svgrepo_com" />
+        <ImageView
+            android:id="@+id/iconMainPage"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_home_24" />
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
