@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
+import com.google.firebase.firestore.CollectionReference;
+import com.mahmut.krankrent.ui.CarList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,7 @@ public class LoginAfterMain extends AppCompatActivity {
     private ListView lstAraclar;
     private TextView adVer,lblAracListesi;
     private DatabaseReference mReference;
+    private DatabaseReference mReferenceCar;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
@@ -48,7 +51,27 @@ public class LoginAfterMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_after_main);
+        String[] maintitle ={
+                "Renault Clio","Ford Focus",
+                "BMW 3 Serisi","Opel Astra",
+                "Mercedes A180",
+        };
+        String[] subtitle ={
+                "Mahmut Can","Ahmet Can",
+                "Fake","Osuruk",
+                "Sekssu",
+        };
+        String[] cost = {
+                "4500","6590",
+                "7124","4900",
+                "6680"
+        };
+        CarList adapter=new CarList(this, maintitle, subtitle,cost);
         lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+        lstAraclar.setAdapter(adapter);
+        //ArrayList<String> araclarListesi = new ArrayList<>();
+        //ArrayAdapter<String> araclarListesiAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,araclarListesi);
+        //lstAraclar.setAdapter(araclarListesiAdapter);
         lblAracListesi = (TextView)findViewById(R.id.lblAracListesi);
         anaSayfa = (ImageView)findViewById(R.id.iconMainPage);
         profileIcon = (ImageView)findViewById(R.id.profileIcon);
@@ -106,6 +129,20 @@ public class LoginAfterMain extends AppCompatActivity {
 
             }
         });
+        /*mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
+        mReferenceCar.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snp : snapshot.getChildren()){
+                    araclarListesi.add(snp.child("Konum").getValue().toString());
+                    araclarListesiAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
     }
     public void cikisYap(View v){
         FirebaseAuth.getInstance().signOut();
