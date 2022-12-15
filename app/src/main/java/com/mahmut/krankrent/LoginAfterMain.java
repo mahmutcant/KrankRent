@@ -12,10 +12,13 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +45,9 @@ import java.util.Objects;
 public class LoginAfterMain extends AppCompatActivity {
     private ListView lstAraclar;
     private TextView adVer,lblAracListesi;
-    private DatabaseReference mReference;
-    private DatabaseReference mReferenceCar;
+    private DatabaseReference mReference,mReferenceCar,mReferenceCity;
+    private Button btnFiltrele;
+    private Spinner lstSehirFiltre;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
@@ -52,10 +56,9 @@ public class LoginAfterMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_after_main);
-        //ArrayList<String> araclarListesi = new ArrayList<>();
-        //ArrayAdapter<String> araclarListesiAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,araclarListesi);
-        //lstAraclar.setAdapter(araclarListesiAdapter);
         lblAracListesi = (TextView)findViewById(R.id.lblAracListesi);
+        lstSehirFiltre = (Spinner)findViewById(R.id.lstSehirFiltre);
+        btnFiltrele = (Button)findViewById(R.id.btnSehirFiltre);
         anaSayfa = (ImageView)findViewById(R.id.iconMainPage);
         profileIcon = (ImageView)findViewById(R.id.profileIcon);
         addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
@@ -105,39 +108,42 @@ public class LoginAfterMain extends AppCompatActivity {
                 String myString = snapshot.child("Adi").getValue().toString();
                 String upperString = myString.substring(0, 1).toUpperCase() + myString.substring(1).toLowerCase();
                 adVer.setText(upperString);
-                lblAracListesi.setText(snapshot.child("Sehir").getValue().toString() + " Konumundaki Araçların Listesi");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_selected_item,arrayList);
+        arrayAdapter.setDropDownViewResource(R.layout.my_dropdown_item);
+        mReferenceCity = FirebaseDatabase.getInstance().getReference("Sehir");
+        mReferenceCity.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.add("Tümü");
+                for(DataSnapshot snp: snapshot.getChildren()){
+                    arrayList.add(snp.getValue().toString());
+                }
+                Spinner s = (Spinner) findViewById(R.id.lstSehirFiltre);
+                s.setAdapter(arrayAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LoginAfterMain.this, "Hata", Toast.LENGTH_SHORT).show();
+            }
+        });
         mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
-        /*String[] maintitle ={
-                "Renault Clio","Ford Focus",
-                "BMW 3 Serisi","Opel Astra",
-                "Mercedes A180",
-        };*/
-        /*String[] subtitle ={
-                "Mahmut Can","Ahmet Can",
-                "Fake","Osuruk",
-                "Sekssu",
-        };*/
-        /*String[] cost = {
-                "4500","6590",
-                "7124","4900",
-                "6680"
-        };*/
         List<String> maintitle = new ArrayList<>();
         List<String> subtitle = new ArrayList<>();
         List<String> cost = new ArrayList<>();
-        mReferenceCar.addValueEventListener(new ValueEventListener() {
+        /*mReferenceCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp : snapshot.getChildren()){
                     maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
                             .getValue().toString());
-                    subtitle.add(snp.child("Konum").getValue().toString()+"/ İlan Sahibi"+snp.child("Paylasan").getValue().toString());
+                    subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
                     cost.add(snp.child("KiraBedeli").getValue().toString());
                     CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
                     lstAraclar = (ListView)findViewById(R.id.LstAraclar);
@@ -146,11 +152,66 @@ public class LoginAfterMain extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });*/
+        lstSehirFiltre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
+                maintitle.clear();
+                subtitle.clear();
+                cost.clear();
+                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                lstAraclar.setAdapter(adapter);
+                if(position == 0){
+                    btnFiltrele.setEnabled(false);
+                    mReferenceCar.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot snp : snapshot.getChildren()){
+                                maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
+                                        .getValue().toString());
+                                subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
+                                cost.add(snp.child("KiraBedeli").getValue().toString());
+                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
+                                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                                lstAraclar.setAdapter(adapter);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+                else {
+                    /*mReferenceCar.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot snp : snapshot.getChildren()){
+                                if(snp.child("Konum").getValue().toString() == lstSehirFiltre.getSelectedItem().toString()){
+                                    maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
+                                            .getValue().toString());
+                                    subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
+                                    cost.add(snp.child("KiraBedeli").getValue().toString());
+                                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
+                                    lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                                    lstAraclar.setAdapter(adapter);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });*/
 
+                }
             }
 
-        });
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
     }
     public void cikisYap(View v){
         FirebaseAuth.getInstance().signOut();

@@ -29,6 +29,27 @@
             android:textAlignment="center"
             android:textColor="@color/themeColor"
             android:textSize="25sp" />
+        <Button
+            android:id="@+id/btnSehirFiltre"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:text="Filtreyi \nUygula"
+            android:textColor="@color/editTextColor"
+            android:textSize="5pt"
+            android:background="@drawable/mybutton"
+            android:backgroundTint="@color/themeColor"
+            android:layout_marginTop="60dp"
+            />
+        <Spinner
+            android:id="@+id/lstSehirFiltre"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="end|top"
+            />
         <TextView
             android:id="@+id/lblAracListesi"
             android:layout_width="match_parent"

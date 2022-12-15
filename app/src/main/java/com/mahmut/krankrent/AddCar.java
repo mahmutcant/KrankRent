@@ -182,6 +182,7 @@ public class AddCar extends AppCompatActivity {
                             mData = new HashMap<>();
                             if(aracKonumdaMi.isChecked()){
                                 mData.put("Paylasan", adAl);
+                                mData.put("paylasanUid", mUser.getUid());
                                 mData.put("Marka", aracMarka.getSelectedItem());
                                 mData.put("Model", aracModel.getSelectedItem());
                                 mData.put("ModelYili", modelYili);
@@ -217,5 +218,12 @@ public class AddCar extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void temizle(View v){
+        finish();
+        startActivity(new Intent(AddCar.this, LoginAfterMain.class));
+        overridePendingTransition(R.anim.sag, R.anim.sol);
+        //aracModelYili.setText("");
+        //aracKiraBedeli.setText("");
     }
 }
