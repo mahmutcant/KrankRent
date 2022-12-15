@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -51,24 +52,6 @@ public class LoginAfterMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_after_main);
-        String[] maintitle ={
-                "Renault Clio","Ford Focus",
-                "BMW 3 Serisi","Opel Astra",
-                "Mercedes A180",
-        };
-        String[] subtitle ={
-                "Mahmut Can","Ahmet Can",
-                "Fake","Osuruk",
-                "Sekssu",
-        };
-        String[] cost = {
-                "4500","6590",
-                "7124","4900",
-                "6680"
-        };
-        CarList adapter=new CarList(this, maintitle, subtitle,cost);
-        lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-        lstAraclar.setAdapter(adapter);
         //ArrayList<String> araclarListesi = new ArrayList<>();
         //ArrayAdapter<String> araclarListesiAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,araclarListesi);
         //lstAraclar.setAdapter(araclarListesiAdapter);
@@ -129,20 +112,45 @@ public class LoginAfterMain extends AppCompatActivity {
 
             }
         });
-        /*mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
+        mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
+        /*String[] maintitle ={
+                "Renault Clio","Ford Focus",
+                "BMW 3 Serisi","Opel Astra",
+                "Mercedes A180",
+        };*/
+        /*String[] subtitle ={
+                "Mahmut Can","Ahmet Can",
+                "Fake","Osuruk",
+                "Sekssu",
+        };*/
+        /*String[] cost = {
+                "4500","6590",
+                "7124","4900",
+                "6680"
+        };*/
+        List<String> maintitle = new ArrayList<>();
+        List<String> subtitle = new ArrayList<>();
+        List<String> cost = new ArrayList<>();
         mReferenceCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp : snapshot.getChildren()){
-                    araclarListesi.add(snp.child("Konum").getValue().toString());
-                    araclarListesiAdapter.notifyDataSetChanged();
+                    maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
+                            .getValue().toString());
+                    subtitle.add(snp.child("Konum").getValue().toString()+"/ İlan Sahibi"+snp.child("Paylasan").getValue().toString());
+                    cost.add(snp.child("KiraBedeli").getValue().toString());
+                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
+                    lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                    lstAraclar.setAdapter(adapter);
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+
+        });
+
     }
     public void cikisYap(View v){
         FirebaseAuth.getInstance().signOut();

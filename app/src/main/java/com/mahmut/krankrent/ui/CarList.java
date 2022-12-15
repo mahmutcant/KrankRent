@@ -9,12 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.mahmut.krankrent.R;
+
+import java.util.List;
+
 public class CarList extends ArrayAdapter<String> {
     private final Activity context;
-    private final String[] maintitle;
-    private final String[] subtitle;
-    private final String[] cost;
-    public CarList(Activity context, String[] maintitle,String[] subtitle, String[] cost) {
+    private final List<String> maintitle;
+    private final List<String> subtitle;
+    private final List<String> cost;
+    public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<String> cost) {
         super(context, R.layout.car_list, maintitle);
         this.context=context;
         this.maintitle=maintitle;
@@ -28,9 +31,9 @@ public class CarList extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView subtitleText = (TextView) rowView.findViewById(R.id.subtitle);
         TextView carCostText = (TextView)rowView.findViewById(R.id.carCost);
-        titleText.setText(maintitle[position]);
-        subtitleText.setText(subtitle[position]);
-        carCostText.setText(cost[position]);
+        titleText.setText(maintitle.get(position));
+        subtitleText.setText(subtitle.get(position));
+        carCostText.setText(cost.get(position));
         return rowView;
     };
 }
