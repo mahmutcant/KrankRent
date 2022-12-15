@@ -17,12 +17,14 @@ public class CarList extends ArrayAdapter<String> {
     private final List<String> maintitle;
     private final List<String> subtitle;
     private final List<String> cost;
-    public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<String> cost) {
+    private final List<String> city;
+    public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<String> cost, List<String> city) {
         super(context, R.layout.car_list, maintitle);
         this.context=context;
         this.maintitle=maintitle;
         this.subtitle=subtitle;
         this.cost = cost;
+        this.city = city;
     }
     public View getView(int position,View view,ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
@@ -31,9 +33,11 @@ public class CarList extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView subtitleText = (TextView) rowView.findViewById(R.id.subtitle);
         TextView carCostText = (TextView)rowView.findViewById(R.id.carCost);
+        TextView carCity = (TextView)rowView.findViewById(R.id.carCity);
         titleText.setText(maintitle.get(position));
         subtitleText.setText(subtitle.get(position));
         carCostText.setText(cost.get(position));
+        carCity.setText(city.get(position));
         return rowView;
     };
 }

@@ -37,6 +37,15 @@
             android:layout_marginTop="10dp"
             android:text="TextView"
             android:layout_marginLeft="5dp"/>
+        <TextView
+            android:id="@+id/carCity"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="7pt"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/themeColor"
+            android:text="TextView"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <TextView
@@ -47,7 +56,7 @@
         android:textColor="@color/themeColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="30dp"
         android:textSize="10pt" />
     <ImageView
@@ -56,7 +65,7 @@
         android:src="@drawable/ic_icons8_turkish_lira_32"
         app:layout_constraintStart_toEndOf="@id/carCost"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="62.5dp"
         />
     <View
         android:layout_width="match_parent"

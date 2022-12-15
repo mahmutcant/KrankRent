@@ -137,15 +137,17 @@ public class LoginAfterMain extends AppCompatActivity {
         List<String> maintitle = new ArrayList<>();
         List<String> subtitle = new ArrayList<>();
         List<String> cost = new ArrayList<>();
-        /*mReferenceCar.addValueEventListener(new ValueEventListener() {
+        List<String> carCity = new ArrayList<>();
+        mReferenceCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp : snapshot.getChildren()){
                     maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
                             .getValue().toString());
-                    subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
+                    subtitle.add("İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
                     cost.add(snp.child("KiraBedeli").getValue().toString());
-                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
+                    carCity.add(snp.child("Konum").getValue().toString());
+                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
                     lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                     lstAraclar.setAdapter(adapter);
                 }
@@ -153,56 +155,11 @@ public class LoginAfterMain extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        });*/
+        });
         lstSehirFiltre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
-                maintitle.clear();
-                subtitle.clear();
-                cost.clear();
-                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-                lstAraclar.setAdapter(adapter);
-                if(position == 0){
-                    btnFiltrele.setEnabled(false);
-                    mReferenceCar.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snp : snapshot.getChildren()){
-                                maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
-                                        .getValue().toString());
-                                subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
-                                cost.add(snp.child("KiraBedeli").getValue().toString());
-                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
-                                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-                                lstAraclar.setAdapter(adapter);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                }
-                else {
-                    /*mReferenceCar.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snp : snapshot.getChildren()){
-                                if(snp.child("Konum").getValue().toString() == lstSehirFiltre.getSelectedItem().toString()){
-                                    maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
-                                            .getValue().toString());
-                                    subtitle.add(snp.child("Konum").getValue().toString()+" / İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
-                                    cost.add(snp.child("KiraBedeli").getValue().toString());
-                                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost);
-                                    lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-                                    lstAraclar.setAdapter(adapter);
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });*/
+                if(position != 0){
 
                 }
             }
