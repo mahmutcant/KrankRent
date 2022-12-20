@@ -1,6 +1,7 @@
 package com.mahmut.krankrent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -110,9 +113,7 @@ public class LoginAfterMain extends AppCompatActivity {
                 adVer.setText(upperString);
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_selected_item,arrayList);
@@ -142,31 +143,71 @@ public class LoginAfterMain extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp : snapshot.getChildren()){
-                    maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili")
-                            .getValue().toString());
-                    subtitle.add("İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
-                    cost.add(snp.child("KiraBedeli").getValue().toString());
-                    carCity.add(snp.child("Konum").getValue().toString());
-                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
-                    lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-                    lstAraclar.setAdapter(adapter);
+                    for(DataSnapshot snapshot1 : snp.getChildren()){
+                        maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
+                        subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
+                        cost.add(snapshot1.child("KiraBedeli").getValue().toString());
+                        carCity.add(snapshot1.child("Konum").getValue().toString());
+                        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                        lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                        lstAraclar.setAdapter(adapter);
+                    }
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-        lstSehirFiltre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btnFiltrele.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
+            public void onClick(View v) {
+                maintitle.clear();
+                subtitle.clear();
+                cost.clear();
+                carCity.clear();
+                String selectedCity = lstSehirFiltre.getSelectedItem().toString();
+                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                lstAraclar.setAdapter(adapter);
+                if(lstSehirFiltre.getSelectedItemPosition() != 0){
+                    mReferenceCar.child(lstSehirFiltre.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot snp : snapshot.getChildren()){
+                                maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili").getValue().toString());
+                                subtitle.add("İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
+                                cost.add(snp.child("KiraBedeli").getValue().toString());
+                                carCity.add(snp.child("Konum").getValue().toString());
+                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                                lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                                lstAraclar.setAdapter(adapter);
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }else {
+                    mReferenceCar.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot snp : snapshot.getChildren()){
+                                for(DataSnapshot snapshot1 : snp.getChildren()){
+                                    maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
+                                    subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
+                                    cost.add(snapshot1.child("KiraBedeli").getValue().toString());
+                                    carCity.add(snapshot1.child("Konum").getValue().toString());
+                                    CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                                    lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                                    lstAraclar.setAdapter(adapter);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }

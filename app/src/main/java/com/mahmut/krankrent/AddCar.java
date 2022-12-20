@@ -197,7 +197,7 @@ public class AddCar extends AppCompatActivity {
                                 mData.put("KiraBedeli", kiraBedeli);
                                 mData.put("Konum", aracEkleSehir.getSelectedItem().toString());
                             }
-                            mReferenceAddCar.child("araclar").child(aracMarka.getSelectedItem()+mUser.getUid()+aracModel.getSelectedItem()+modelYili).setValue(mData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            mReferenceAddCar.child("araclar").child(mData.get("Konum").toString()).child(aracMarka.getSelectedItem()+mUser.getUid()+aracModel.getSelectedItem()+modelYili).setValue(mData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
