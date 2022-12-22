@@ -206,6 +206,8 @@ public class AddCar extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(AddCar.this, "Araç Kaydı Başarılı", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(AddCar.this, LoginAfterMain.class));
+                                        overridePendingTransition(R.anim.sag, R.anim.sol);
                                     }
                                     else {
                                         Toast.makeText(AddCar.this, "Araç Kaydı Başarısız", Toast.LENGTH_SHORT).show();

@@ -21,10 +21,11 @@
         app:layout_constraintWidth_percent=".85">
         <Spinner
             android:id="@+id/MyCarList"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="60dp" />
+            android:layout_width="210dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="top"
+            android:layout_marginTop="60dp"/>
         <Button
             android:id="@+id/btnSec"
             android:layout_width="90dp"
@@ -32,15 +33,15 @@
             android:text="Seç"
             android:backgroundTint="@color/themeColor"
             android:background="@drawable/mybutton"
-            android:layout_gravity="top"
-            android:layout_marginTop="125dp"
-            android:layout_marginLeft="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp"
             />
         <androidx.cardview.widget.CardView
             android:id="@+id/seciliArac"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            app:cardBackgroundColor="@color/editTextColor"
+            android:layout_height="480dp"
+            app:cardBackgroundColor="@color/white"
             android:layout_gravity="bottom">
             <TextView
                 android:layout_width="150dp"
@@ -51,12 +52,14 @@
                 android:textColor="@color/themeColor"
                 android:text="Günlük Kira Bedeli"/>
             <EditText
+                android:inputType="number"
                 android:id="@+id/txtGunlukKira"
                 android:layout_width="250dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="100dp"
+                android:background="@color/editTextColor"
                 android:textColor="@color/themeColor"
                 android:backgroundTint="@color/editTextColor"
                 />
@@ -76,8 +79,8 @@
                 android:text="Kaydet"
                 android:backgroundTint="@color/themeColor"
                 android:background="@drawable/mybutton"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="150dp"
                 />
             <Button
                 android:id="@+id/btnAracSil"
@@ -86,9 +89,10 @@
                 android:text="Aracı Sil"
                 android:backgroundTint="@color/design_default_color_error"
                 android:background="@drawable/mybutton"
-                android:layout_gravity="center"
-                android:layout_marginTop="90dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="210dp"
                 />
+
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
