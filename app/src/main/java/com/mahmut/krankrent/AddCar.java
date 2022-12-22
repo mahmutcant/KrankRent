@@ -175,8 +175,9 @@ public class AddCar extends AppCompatActivity {
                     mReferenceUser.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String adAl = snapshot.child("Adi").getValue().toString();
+                            String adAl = snapshot.child("Adi").getValue().toString() + " "+ snapshot.child("Soyadi").getValue().toString();
                             String sehirAl = snapshot.child("Sehir").getValue().toString();
+                            String noAl = snapshot.child("kullaniciTel").getValue().toString();
                             kiraBedeli = aracKiraBedeli.getText().toString();
                             modelYili = aracModelYili.getText().toString();
                             mData = new HashMap<>();
@@ -188,16 +189,19 @@ public class AddCar extends AppCompatActivity {
                                 mData.put("ModelYili", modelYili);
                                 mData.put("KiraBedeli", kiraBedeli);
                                 mData.put("Konum", sehirAl);
+                                mData.put("iletisim", noAl);
                             }
                             else{
                                 mData.put("Paylasan", adAl);
                                 mData.put("Marka", aracMarka.getSelectedItem());
                                 mData.put("Model", aracModel.getSelectedItem());
+                                mData.put("paylasanUid", mUser.getUid());
                                 mData.put("ModelYili", modelYili);
                                 mData.put("KiraBedeli", kiraBedeli);
                                 mData.put("Konum", aracEkleSehir.getSelectedItem().toString());
+                                mData.put("iletisim", noAl);
                             }
-                            mReferenceAddCar.child("araclar").child(mData.get("Konum").toString()).child(aracMarka.getSelectedItem()+mUser.getUid()+aracModel.getSelectedItem()+modelYili).setValue(mData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            mReferenceAddCar.child("araclar").child(mData.get("Konum").toString()).child(mData.get("paylasanUid").toString()).child(aracMarka.getSelectedItem()+mUser.getUid()+aracModel.getSelectedItem()+modelYili).setValue(mData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){

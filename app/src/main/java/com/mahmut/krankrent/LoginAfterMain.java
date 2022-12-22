@@ -144,13 +144,15 @@ public class LoginAfterMain extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snp : snapshot.getChildren()){
                     for(DataSnapshot snapshot1 : snp.getChildren()){
-                        maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
-                        subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
-                        cost.add(snapshot1.child("KiraBedeli").getValue().toString());
-                        carCity.add(snapshot1.child("Konum").getValue().toString());
-                        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
-                        lstAraclar = (ListView)findViewById(R.id.LstAraclar);
-                        lstAraclar.setAdapter(adapter);
+                        for(DataSnapshot snp2 : snapshot1.getChildren()){
+                            maintitle.add(snp2.child("Marka").getValue().toString()+" "+snp2.child("Model").getValue().toString()+" "+snp2.child("ModelYili").getValue().toString());
+                            subtitle.add("İlan Sahibi : "+snp2.child("Paylasan").getValue().toString());
+                            cost.add(snp2.child("KiraBedeli").getValue().toString());
+                            carCity.add(snp2.child("Konum").getValue().toString() +" \n+90 "+snp2.child("iletisim").getValue().toString());
+                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                            lstAraclar = (ListView)findViewById(R.id.LstAraclar);
+                            lstAraclar.setAdapter(adapter);
+                        }
                     }
                 }
             }
@@ -176,11 +178,12 @@ public class LoginAfterMain extends AppCompatActivity {
                                 maintitle.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString()+" "+snp.child("ModelYili").getValue().toString());
                                 subtitle.add("İlan Sahibi : "+snp.child("Paylasan").getValue().toString());
                                 cost.add(snp.child("KiraBedeli").getValue().toString());
-                                carCity.add(snp.child("Konum").getValue().toString());
+                                carCity.add(snp.child("Konum").getValue().toString() +" +90 "+snp.child("iletisim").getValue().toString());
                                 CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
                                 lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                                 lstAraclar.setAdapter(adapter);
                             }
+
                         }
 
                         @Override
@@ -197,7 +200,7 @@ public class LoginAfterMain extends AppCompatActivity {
                                     maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
                                     subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
                                     cost.add(snapshot1.child("KiraBedeli").getValue().toString());
-                                    carCity.add(snapshot1.child("Konum").getValue().toString());
+                                    carCity.add(snapshot1.child("Konum").getValue().toString()+" +90 "+snapshot1.child("iletisim").getValue().toString());
                                     CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
                                     lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                                     lstAraclar.setAdapter(adapter);

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.mahmut.krankrent.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class CarList extends ArrayAdapter<String> {
