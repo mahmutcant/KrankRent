@@ -28,15 +28,19 @@
             android:layout_marginLeft="20dp"
             android:text="Adınız"/>
         <EditText
+            android:id="@+id/txtProfilAdi"
+            android:textColor="@color/themeColor"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/mybutton"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="45dp"
+            android:enabled="false"
             android:backgroundTint="@color/editTextColor"
             android:textColorHint="@color/themeColor" />
         <ImageView
+            android:id="@+id/acAdi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_edit_24"
@@ -53,6 +57,7 @@
             android:text="Soyadınız"/>
         <EditText
             android:layout_width="match_parent"
+            android:enabled="false"
             android:layout_height="35dp"
             android:background="@drawable/mybutton"
             android:layout_marginLeft="15dp"
@@ -60,14 +65,6 @@
             android:layout_marginTop="100dp"
             android:backgroundTint="@color/editTextColor"
             android:textColorHint="@color/themeColor" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_edit_24"
-            android:layout_gravity="end"
-            android:layout_marginTop="105dp"
-            android:layout_marginRight="10dp"
-            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
@@ -76,6 +73,8 @@
             android:layout_marginLeft="20dp"
             android:text="Soyadınız"/>
         <EditText
+            android:id="@+id/txtProfilSoyadi"
+            android:textColor="@color/themeColor"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/mybutton"
@@ -85,6 +84,7 @@
             android:backgroundTint="@color/editTextColor"
             android:textColorHint="@color/themeColor" />
         <ImageView
+            android:id="@+id/acSoyad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_edit_24"
@@ -100,15 +100,19 @@
             android:layout_marginLeft="20dp"
             android:text="Telefon"/>
         <EditText
+            android:id="@+id/txtProfilTelefon"
+            android:textColor="@color/themeColor"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/mybutton"
+            android:enabled="false"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="160dp"
             android:backgroundTint="@color/editTextColor"
             android:textColorHint="@color/themeColor" />
         <ImageView
+            android:id="@+id/acTelefon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_edit_24"
@@ -117,6 +121,7 @@
             android:layout_marginRight="10dp"
             />
         <ImageView
+            android:id="@+id/acSehirSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_edit_24"
@@ -133,12 +138,34 @@
             android:layout_marginLeft="20dp"
             />
         <Spinner
+            android:id="@+id/spinnerProfilSehir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="240dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/myedittext"
+            android:backgroundTint="@color/editTextColor"
+            />
+        <Button
+            android:id="@+id/btnProfilKaydet"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="180dp"
+            android:text="Kaydet"
+            android:background="@drawable/mybutton"
+            android:backgroundTint="@color/themeColor"
+            />
+        <Button
+            android:id="@+id/btnProfilVazgec"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="100dp"
+            android:text="Vazgeç"
+            android:textColor="@color/themeColor"
+            android:background="@drawable/mybutton"
             android:backgroundTint="@color/editTextColor"
             />
     </androidx.cardview.widget.CardView>
