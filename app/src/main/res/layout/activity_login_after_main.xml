@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textAlignment="center"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="start"
             android:textColor="@color/themeColor"
             android:textSize="25sp" />
         <Button
@@ -41,6 +42,47 @@
             android:backgroundTint="@color/themeColor"
             android:layout_marginTop="60dp"
             />
+        <Button
+            android:id="@+id/adetAzalt"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="-"
+            android:textColor="@color/themeColor"
+            android:background="@color/editTextColor"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="75dp"
+            android:layout_gravity="top|end"
+            android:textSize="10pt" />
+        <Button
+            android:id="@+id/adetArttir"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="+"
+            android:textColor="@color/themeColor"
+            android:background="@color/editTextColor"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:textSize="10pt" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kiralanacak Gün"
+            android:textColor="@color/themeColor"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="115dp"
+            android:textSize="6pt" />
+        <TextView
+            android:id="@+id/adetSayisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/themeColor"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="55dp"
+            android:textSize="7pt" />
         <Spinner
             android:id="@+id/lstSehirFiltre"
             android:layout_width="match_parent"

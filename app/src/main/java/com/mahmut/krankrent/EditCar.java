@@ -66,9 +66,7 @@ public class EditCar extends AppCompatActivity {
         seciliArac.setVisibility(View.INVISIBLE);
         txtGunlukKira.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-            }
+            public void onFocusChange(View v, boolean hasFocus) {}
         });
         btnSec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,22 +84,21 @@ public class EditCar extends AppCompatActivity {
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_selected_item,arrayList);
         arrayAdapter.setDropDownViewResource(R.layout.my_dropdown_item);
-        mReferenceUserLoc.addValueEventListener(new ValueEventListener() {
+        mReferenceMyCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mReferenceMyCar.child(snapshot.getValue().toString()).child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        arrayList.add("");
-                        for (DataSnapshot snp : snapshot.getChildren()){
-                            arrayList.add(snp.child("Marka").getValue().toString()+" "+snp.child("Model").getValue().toString());
+                for(DataSnapshot snp : snapshot.getChildren()){
+                    if(snp.child(mUser.getUid()).getValue() != null){
+                        for(DataSnapshot snapshot1 : snp.getChildren()){
+                            for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                arrayList.add("");
+                                arrayList.add(snapshot2.getKey());
+                            }
+                            Spinner s = (Spinner) findViewById(R.id.MyCarList);
+                            s.setAdapter(arrayAdapter);
                         }
-                        Spinner s = (Spinner) findViewById(R.id.MyCarList);
-                        s.setAdapter(arrayAdapter);
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -115,59 +112,28 @@ public class EditCar extends AppCompatActivity {
                 }
                 else{
                     seciliArac.setVisibility(View.VISIBLE);
-                    mReferenceUserLoc.addValueEventListener(new ValueEventListener() {
+                    mReferenceMyCar.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            mReferenceMyCar.child(snapshot.getValue().toString()).child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
-                                int sayac = 1;
+                            btnAracDuzenleKaydet.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    for (DataSnapshot snp : snapshot.getChildren()){
-                                        if(sayac == myCarList.getSelectedItemPosition()){
-                                            txtGunlukKira.setText(snp.child("KiraBedeli").getValue().toString());
-                                            sayac++;
-                                            btnAracDuzenleKaydet.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    closeKeyboard();
-                                                    snp.getRef().child("KiraBedeli").setValue(txtGunlukKira.getText().toString())
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if(task.isSuccessful()){
-                                                                    Toast.makeText(EditCar.this, "Fiyat Düzenlendi", Toast.LENGTH_SHORT).show();
-                                                                    startActivity(new Intent(EditCar.this, LoginAfterMain.class));
-                                                                    overridePendingTransition(R.anim.sag, R.anim.sol);
-                                                                }
-                                                                else {
-                                                                    Toast.makeText(EditCar.this, "Fiyat Düzenlemesi Gerçekleştirilemedi", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            }
-                                                        }
-                                                    );
+                                public void onClick(View v) {
+                                    if(!txtGunlukKira.getText().toString().isEmpty()){
+                                        for(DataSnapshot snp : snapshot.getChildren()){
+                                            for(DataSnapshot snapshot1 : snp.getChildren()){
+                                                for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                                    if(snapshot2.getKey() == myCarList.getSelectedItem()){
+                                                        snapshot2.child("KiraBedeli").getRef().setValue(Integer.parseInt(txtGunlukKira.getText().toString()));
+                                                        startActivity(new Intent(EditCar.this, LoginAfterMain.class));
+                                                        overridePendingTransition(R.anim.sag, R.anim.sol);
+                                                    }
                                                 }
-                                            });
-                                            btnSil.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    snp.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
-                                                                Toast.makeText(EditCar.this, "Araç Başarıyla Silindi", Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(EditCar.this, LoginAfterMain.class));
-                                                                overridePendingTransition(R.anim.sag, R.anim.sol);
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                        sayac++;
+                                            }
+                                        }   
+                                    }else{
+                                        Toast.makeText(EditCar.this, "Günlük Kira Bedeli Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {}
                             });
                         }
                         @Override
@@ -181,8 +147,6 @@ public class EditCar extends AppCompatActivity {
             public void onClick(View v) {
                 txtGunlukKira.setEnabled(true);
                 txtGunlukKira.requestFocus();
-
-
             }
         });
         iconCikis.setOnClickListener(new View.OnClickListener() {
