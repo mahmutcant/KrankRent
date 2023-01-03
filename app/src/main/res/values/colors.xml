@@ -9,4 +9,5 @@
     <color name="white">#FFF</color>
     <color name="themeColor">#202c56</color>
     <color name="editTextColor">#edf0f7</color>
+    <color name="yellow">#FFCC00</color>
 </resources>

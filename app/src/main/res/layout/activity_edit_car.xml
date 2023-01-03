@@ -82,6 +82,44 @@
                 android:layout_gravity="center|top"
                 android:layout_marginTop="150dp"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Kiralandı olarak işaretle"
+                android:textColor="@color/themeColor"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="10dp"
+                android:text="Kiralı değil olarak işaretle"
+                android:textColor="@color/themeColor"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginLeft="10dp"
+                >
+                <RadioButton
+                    android:id="@+id/kirali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:background="@color/editTextColor"
+                    android:textColor="@color/themeColor"
+                    />
+                <RadioButton
+                    android:id="@+id/kiraliDegil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:background="@color/editTextColor"
+                    android:textColor="@color/themeColor"
+                    android:layout_marginTop="10dp"
+                    />
+            </RadioGroup>
             <Button
                 android:id="@+id/btnAracSil"
                 android:layout_width="150dp"

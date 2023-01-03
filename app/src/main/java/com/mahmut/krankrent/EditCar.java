@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ public class EditCar extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private EditText txtGunlukKira;
+    private RadioButton kirali,kiraliDegil;
     int acikMi = 0;
     String sehirAl;
     @Override
@@ -54,6 +58,8 @@ public class EditCar extends AppCompatActivity {
         btnAracDuzenleKaydet = (Button)findViewById(R.id.btnAracDuzenle);
         btnSil = (Button)findViewById(R.id.btnAracSil);
         txtGunlukKira = (EditText)findViewById(R.id.txtGunlukKira);
+        kirali = (RadioButton)findViewById(R.id.kirali);
+        kiraliDegil = (RadioButton)findViewById(R.id.kiraliDegil);
         txtGunlukKira.setEnabled(false);
         duzenle = (ImageView)findViewById(R.id.Imgduzenle);
         myCarList = (Spinner)findViewById(R.id.MyCarList);
@@ -71,7 +77,7 @@ public class EditCar extends AppCompatActivity {
         btnSec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(acikMi %2 == 0){
+                if(acikMi % 2 == 0){
                     seciliArac.setVisibility(View.VISIBLE);
                     btnSec.setText("Vazgeç");
                 }else {
@@ -123,6 +129,7 @@ public class EditCar extends AppCompatActivity {
                                             for(DataSnapshot snapshot1 : snp.getChildren()){
                                                 for(DataSnapshot snapshot2 : snapshot1.getChildren()){
                                                     if(snapshot2.getKey() == myCarList.getSelectedItem()){
+                                                        snapshot2.child("eskiFiyat").getRef().setValue(snapshot2.child("KiraBedeli").getValue());
                                                         snapshot2.child("KiraBedeli").getRef().setValue(Integer.parseInt(txtGunlukKira.getText().toString()));
                                                         startActivity(new Intent(EditCar.this, LoginAfterMain.class));
                                                         overridePendingTransition(R.anim.sag, R.anim.sol);
@@ -132,6 +139,54 @@ public class EditCar extends AppCompatActivity {
                                         }   
                                     }else{
                                         Toast.makeText(EditCar.this, "Günlük Kira Bedeli Boş Bırakılamaz", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            kirali.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    for(DataSnapshot snp : snapshot.getChildren()){
+                                        for(DataSnapshot snapshot1 : snp.getChildren()){
+                                            for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                                if(snapshot2.getKey() == myCarList.getSelectedItem()){
+                                                    snapshot2.child("kiraliMi").getRef().setValue(true);
+                                                    startActivity(new Intent(EditCar.this, LoginAfterMain.class));
+                                                    overridePendingTransition(R.anim.sag, R.anim.sol);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            kiraliDegil.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    for(DataSnapshot snp : snapshot.getChildren()){
+                                        for(DataSnapshot snapshot1 : snp.getChildren()){
+                                            for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                                if(snapshot2.getKey() == myCarList.getSelectedItem()){
+                                                    snapshot2.child("kiraliMi").getRef().setValue(false);
+                                                    startActivity(new Intent(EditCar.this, LoginAfterMain.class));
+                                                    overridePendingTransition(R.anim.sag, R.anim.sol);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            btnSil.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    for(DataSnapshot snp : snapshot.getChildren()){
+                                        for(DataSnapshot snapshot1 : snp.getChildren()){
+                                            for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                                                if(snapshot2.getKey() == myCarList.getSelectedItem()){
+                                                    snapshot2.getRef().removeValue();
+                                                    startActivity(new Intent(EditCar.this, LoginAfterMain.class));
+                                                    overridePendingTransition(R.anim.sag, R.anim.sol);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             });

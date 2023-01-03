@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -56,12 +57,16 @@ public class LoginAfterMain extends AppCompatActivity {
     private FirebaseUser mUser;
     private ProgressBar spinner;
     private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis;
+    private LinearLayout aracListesi;
     private TextView txtAdet;
     private int adetSayici = 1;
     List<String> subtitle = new ArrayList<>();
     List<Integer> cost = new ArrayList<>();
     List<String> carCity = new ArrayList<>();
     List<String> maintitle = new ArrayList<>();
+    List<String> kiraliAraclar = new ArrayList<>();
+    List<String> telNo = new ArrayList<>();
+    List<String> eskiFiyat = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +100,7 @@ public class LoginAfterMain extends AppCompatActivity {
         arabaDuzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(LoginAfterMain.this, EditCar.class));
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
@@ -168,6 +174,7 @@ public class LoginAfterMain extends AppCompatActivity {
                     adetSayici-=10;
                     veriAl(adetSayici);
                     txtAdet.setText(Integer.toString(adetSayici));
+
                 }
                 return true;
             }
@@ -193,7 +200,10 @@ public class LoginAfterMain extends AppCompatActivity {
                             subtitle.add("İlan Sahibi : "+snp2.child("Paylasan").getValue().toString());
                             cost.add(Integer.parseInt(snp2.child("KiraBedeli").getValue().toString()));
                             carCity.add(snp2.child("Konum").getValue().toString() +" \n+90 "+snp2.child("iletisim").getValue().toString());
-                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                            kiraliAraclar.add(snp2.child("kiraliMi").getValue().toString());
+                            telNo.add(snp2.child("iletisim").getValue().toString());
+                            eskiFiyat.add(snp2.child("eskiFiyat").getValue().toString());
+                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
                             lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                             lstAraclar.setAdapter(adapter);
                         }
@@ -203,6 +213,7 @@ public class LoginAfterMain extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+
         btnFiltrele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,8 +239,11 @@ public class LoginAfterMain extends AppCompatActivity {
         subtitle.clear();
         cost.clear();
         carCity.clear();
+        kiraliAraclar.clear();
+        telNo.clear();
+        eskiFiyat.clear();
         String selectedCity = lstSehirFiltre.getSelectedItem().toString();
-        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
         lstAraclar = (ListView)findViewById(R.id.LstAraclar);
         lstAraclar.setAdapter(adapter);
         if(lstSehirFiltre.getSelectedItemPosition() != 0){
@@ -238,11 +252,15 @@ public class LoginAfterMain extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot snp : snapshot.getChildren()){
                         for(DataSnapshot snapshot1 : snp.getChildren()){
+                            System.out.println(snapshot1.getKey());
                             maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
                             subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
                             cost.add(Integer.parseInt(snapshot1.child("KiraBedeli").getValue().toString())*adet);
                             carCity.add(snapshot1.child("Konum").getValue().toString() +" +90 "+snapshot1.child("iletisim").getValue().toString());
-                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                            kiraliAraclar.add(snapshot1.child("kiraliMi").getValue().toString());
+                            telNo.add(snapshot1.child("iletisim").getValue().toString());
+                            eskiFiyat.add(snapshot1.child("eskiFiyat").getValue().toString());
+                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
                             lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                             lstAraclar.setAdapter(adapter);
                         }
@@ -262,7 +280,9 @@ public class LoginAfterMain extends AppCompatActivity {
                                 subtitle.add("İlan Sahibi : "+snp1.child("Paylasan").getValue().toString());
                                 cost.add(Integer.parseInt(snp1.child("KiraBedeli").getValue().toString())*adet);
                                 carCity.add(snp1.child("Konum").getValue().toString()+" +90 "+snp1.child("iletisim").getValue().toString());
-                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity);
+                                kiraliAraclar.add(snp1.child("kiraliMi").getValue().toString());
+                                eskiFiyat.add(snp1.child("eskiFiyat").getValue().toString());
+                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
                                 lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                                 lstAraclar.setAdapter(adapter);
                             }

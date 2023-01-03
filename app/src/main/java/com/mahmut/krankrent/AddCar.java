@@ -190,6 +190,8 @@ public class AddCar extends AppCompatActivity {
                                 mData.put("KiraBedeli", kiraBedeli);
                                 mData.put("Konum", sehirAl);
                                 mData.put("iletisim", noAl);
+                                mData.put("kiraliMi",false);
+                                mData.put("eskiFiyat",0);
                             }
                             else{
                                 mData.put("Paylasan", adAl);
@@ -200,6 +202,8 @@ public class AddCar extends AppCompatActivity {
                                 mData.put("KiraBedeli", kiraBedeli);
                                 mData.put("Konum", aracEkleSehir.getSelectedItem().toString());
                                 mData.put("iletisim", noAl);
+                                mData.put("kiraliMi",false);
+                                mData.put("eskiFiyat",0);
                             }
                             mReferenceAddCar.child("araclar").child(mData.get("Konum").toString()).child(mData.get("paylasanUid").toString()).child(aracMarka.getSelectedItem()+mUser.getUid()+aracModel.getSelectedItem()+modelYili).setValue(mData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
