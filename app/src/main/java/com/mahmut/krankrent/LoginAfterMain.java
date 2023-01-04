@@ -44,6 +44,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -56,7 +57,7 @@ public class LoginAfterMain extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,favoritePage;
     private LinearLayout aracListesi;
     private TextView txtAdet;
     private int adetSayici = 1;
@@ -67,6 +68,8 @@ public class LoginAfterMain extends AppCompatActivity {
     List<String> kiraliAraclar = new ArrayList<>();
     List<String> telNo = new ArrayList<>();
     List<String> eskiFiyat = new ArrayList<>();
+    List<String> paylasanUid = new ArrayList<>();
+    List<String> aracKey = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,7 @@ public class LoginAfterMain extends AppCompatActivity {
         addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
         arabaDuzenle = (ImageView)findViewById(R.id.arabaDuzenle);
         iconCikis = (ImageView)findViewById(R.id.iconCikis);
+        favoritePage = (ImageView)findViewById(R.id.favoritePage);
         txtAdet = (TextView)findViewById(R.id.adetSayisi);
         btnArttir = (Button)findViewById(R.id.adetArttir);
         btnAzalt = (Button)findViewById(R.id.adetAzalt);
@@ -100,7 +104,6 @@ public class LoginAfterMain extends AppCompatActivity {
         arabaDuzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(LoginAfterMain.this, EditCar.class));
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
@@ -111,6 +114,13 @@ public class LoginAfterMain extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(LoginAfterMain.this, LoginPage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        favoritePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAfterMain.this, FavoritePage.class));
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });
@@ -199,11 +209,13 @@ public class LoginAfterMain extends AppCompatActivity {
                             maintitle.add(snp2.child("Marka").getValue().toString()+" "+snp2.child("Model").getValue().toString()+" "+snp2.child("ModelYili").getValue().toString());
                             subtitle.add("İlan Sahibi : "+snp2.child("Paylasan").getValue().toString());
                             cost.add(Integer.parseInt(snp2.child("KiraBedeli").getValue().toString()));
-                            carCity.add(snp2.child("Konum").getValue().toString() +" \n+90 "+snp2.child("iletisim").getValue().toString());
+                            carCity.add(snp2.child("Konum").getValue().toString());
                             kiraliAraclar.add(snp2.child("kiraliMi").getValue().toString());
                             telNo.add(snp2.child("iletisim").getValue().toString());
                             eskiFiyat.add(snp2.child("eskiFiyat").getValue().toString());
-                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
+                            paylasanUid.add(snp2.child("paylasanUid").getValue().toString());
+                            aracKey.add(snp2.getKey());
+                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat,paylasanUid,aracKey);
                             lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                             lstAraclar.setAdapter(adapter);
                         }
@@ -242,8 +254,10 @@ public class LoginAfterMain extends AppCompatActivity {
         kiraliAraclar.clear();
         telNo.clear();
         eskiFiyat.clear();
+        paylasanUid.clear();
+        aracKey.clear();
         String selectedCity = lstSehirFiltre.getSelectedItem().toString();
-        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
+        CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat,paylasanUid,aracKey);
         lstAraclar = (ListView)findViewById(R.id.LstAraclar);
         lstAraclar.setAdapter(adapter);
         if(lstSehirFiltre.getSelectedItemPosition() != 0){
@@ -260,7 +274,9 @@ public class LoginAfterMain extends AppCompatActivity {
                             kiraliAraclar.add(snapshot1.child("kiraliMi").getValue().toString());
                             telNo.add(snapshot1.child("iletisim").getValue().toString());
                             eskiFiyat.add(snapshot1.child("eskiFiyat").getValue().toString());
-                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
+                            paylasanUid.add(snapshot1.child("paylasanUid").getValue().toString());
+                            aracKey.add(snapshot1.getKey());
+                            CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat,paylasanUid,aracKey);
                             lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                             lstAraclar.setAdapter(adapter);
                         }
@@ -282,7 +298,9 @@ public class LoginAfterMain extends AppCompatActivity {
                                 carCity.add(snp1.child("Konum").getValue().toString()+" +90 "+snp1.child("iletisim").getValue().toString());
                                 kiraliAraclar.add(snp1.child("kiraliMi").getValue().toString());
                                 eskiFiyat.add(snp1.child("eskiFiyat").getValue().toString());
-                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat);
+                                paylasanUid.add(snp1.child("paylasanUid").getValue().toString());
+                                aracKey.add(snp1.getKey());
+                                CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat,paylasanUid,aracKey);
                                 lstAraclar = (ListView)findViewById(R.id.LstAraclar);
                                 lstAraclar.setAdapter(adapter);
                             }

@@ -15,6 +15,7 @@
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_home_active.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1455" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_emergency_exit_svgrepo_com.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_icons8_turkish_lira_32.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1455" />
@@ -26,14 +27,15 @@
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_add_car.xml" value="0.28994082840236685" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_custom_list_view.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_edit_car.xml" value="0.5" />
-        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_login_after_main.xml" value="0.22" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_favorite_page.xml" value="0.2" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_login_after_main.xml" value="0.33" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_login_page.xml" value="0.3625" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_my_car_list.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_profile_page.xml" value="0.28994082840236685" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_register_page.xml" value="0.22" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_sidebar.xml" value="0.2" />
-        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/car_list.xml" value="0.4" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/car_list.xml" value="0.22" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/content_sidebar.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/my_dropdown_item.xml" value="0.184375" />

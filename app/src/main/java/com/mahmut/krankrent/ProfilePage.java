@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfilePage extends AppCompatActivity {
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,acAdi,acSoyad,acTelefon,acSehirSpinner;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,acAdi,acSoyad,acTelefon,acSehirSpinner,favoritePage;
     private Button btnKaydet,btnVazgec;
     private EditText txtProfilAdi,txtProfilSoyadi,txtProfilTelefon;
     private FirebaseAuth mAuth;
@@ -43,6 +43,7 @@ public class ProfilePage extends AppCompatActivity {
         acSoyad = (ImageView)findViewById(R.id.acSoyad);
         acTelefon = (ImageView)findViewById(R.id.acTelefon);
         acSehirSpinner = (ImageView)findViewById(R.id.acSehirSpinner);
+        favoritePage = (ImageView)findViewById(R.id.favoritePage);
         btnKaydet = (Button)findViewById(R.id.btnProfilKaydet);
         btnVazgec = (Button)findViewById(R.id.btnProfilVazgec);
         mReference = FirebaseDatabase.getInstance().getReference("kullanicilar").child(mUser.getUid());
@@ -72,6 +73,13 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 txtProfilTelefon.setEnabled(true);
+            }
+        });
+        favoritePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfilePage.this, FavoritePage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });
         iconCikis.setOnClickListener(new View.OnClickListener() {

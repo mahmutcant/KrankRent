@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddCar extends AppCompatActivity {
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,favoritePage;
     private Spinner aracModel,aracMarka,aracEkleSehir;
     private DatabaseReference mReference,mReference2,mReference3,mReferenceUser,mReferenceAddCar;
     private TextView txtAracinSehri;
@@ -77,6 +77,14 @@ public class AddCar extends AppCompatActivity {
         addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
         arabaDuzenle = (ImageView)findViewById(R.id.arabaDuzenle);
         iconCikis = (ImageView)findViewById(R.id.iconCikis);
+        favoritePage = (ImageView)findViewById(R.id.favoritePage);
+        favoritePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddCar.this, FavoritePage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
         ArrayList<String> markaList = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_selected_item,markaList);
         arrayAdapter.setDropDownViewResource(R.layout.my_dropdown_item);
@@ -192,6 +200,7 @@ public class AddCar extends AppCompatActivity {
                                 mData.put("iletisim", noAl);
                                 mData.put("kiraliMi",false);
                                 mData.put("eskiFiyat",0);
+                                mData.put("favoriyeAlanlar",0);
                             }
                             else{
                                 mData.put("Paylasan", adAl);

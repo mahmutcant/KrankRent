@@ -33,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class EditCar extends AppCompatActivity {
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,duzenle;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,duzenle,favoritePage;
     private Button btnSec,btnAracDuzenleKaydet,btnSil;
     private CardView seciliArac;
     private Spinner myCarList;
@@ -54,6 +54,7 @@ public class EditCar extends AppCompatActivity {
         anaSayfa = (ImageView)findViewById(R.id.iconMainPage);
         addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
         iconCikis = (ImageView)findViewById(R.id.iconCikis);
+        favoritePage = (ImageView)findViewById(R.id.favoritePage);
         btnSec = (Button)findViewById(R.id.btnSec);
         btnAracDuzenleKaydet = (Button)findViewById(R.id.btnAracDuzenle);
         btnSil = (Button)findViewById(R.id.btnAracSil);
@@ -73,6 +74,13 @@ public class EditCar extends AppCompatActivity {
         txtGunlukKira.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {}
+        });
+        favoritePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditCar.this, FavoritePage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
         });
         btnSec.setOnClickListener(new View.OnClickListener() {
             @Override
