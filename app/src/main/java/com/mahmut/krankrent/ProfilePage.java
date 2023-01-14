@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfilePage extends AppCompatActivity {
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,acAdi,acSoyad,acTelefon,acSehirSpinner,favoritePage;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,acAdi,acSoyad,acTelefon,acSehirSpinner,favoritePage,adminPage;
     private Button btnKaydet,btnVazgec;
     private EditText txtProfilAdi,txtProfilSoyadi,txtProfilTelefon;
     private FirebaseAuth mAuth;
@@ -46,6 +46,7 @@ public class ProfilePage extends AppCompatActivity {
         favoritePage = (ImageView)findViewById(R.id.favoritePage);
         btnKaydet = (Button)findViewById(R.id.btnProfilKaydet);
         btnVazgec = (Button)findViewById(R.id.btnProfilVazgec);
+        adminPage = (ImageView)findViewById(R.id.adminPage);
         mReference = FirebaseDatabase.getInstance().getReference("kullanicilar").child(mUser.getUid());
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,6 +54,12 @@ public class ProfilePage extends AppCompatActivity {
                 txtProfilAdi.setText(snapshot.child("Adi").getValue().toString());
                 txtProfilSoyadi.setText(snapshot.child("Soyadi").getValue().toString());
                 txtProfilTelefon.setText(snapshot.child("kullaniciTel").getValue().toString());
+                if(snapshot.child("adminMi").getValue().toString() == "true"){
+                    adminPage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    adminPage.setVisibility(View.INVISIBLE);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -88,6 +95,13 @@ public class ProfilePage extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(ProfilePage.this, LoginPage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        adminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfilePage.this, AdminSpecialPage.class));
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });

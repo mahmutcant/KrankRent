@@ -1,4 +1,4 @@
-package com.apps6283.vrcreator;
+package com.mahmut.krankrent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,7 +28,7 @@ public class FcmNotificationsSender  {
 
     private RequestQueue requestQueue;
     private final String postUrl = "https://fcm.googleapis.com/fcm/send";
-    private final String fcmServerKey ="AAAAXP5qWgs:APA91bFMMij4XEFJPZIQ8CQyoh-NJeAZfD0l1Fejj8M45-AtyN_0b0rUuRq_7codcFEJzev0Hu3cGnX8acA9LlqWK7a4tW886XHUXzIICLW2S3HBG_5ZH3Of93-SL1urTmmkvnGVRSHc";
+    private final String fcmServerKey ="AAAACFtI8mw:APA91bGguviLqOdUqoR8L3I6N-AQJ1kVF-uX70S8NVLV4Ctwk6-aRoFF8RhimZ50N6asm6lqgayrJpPuYga-i2DkA1TEHfr9Amp_40QvFgJsGOrY1GrkoC4B6l1P_86ynsuBPmca0dLE";
 
     public FcmNotificationsSender(String userFcmToken, String title, String body, Context mContext, Activity mActivity) {
         this.userFcmToken = userFcmToken;
@@ -49,7 +49,7 @@ public class FcmNotificationsSender  {
             JSONObject notiObject = new JSONObject();
             notiObject.put("title", title);
             notiObject.put("body", body);
-            notiObject.put("icon", "icon"); // enter icon that exists in drawable only
+            notiObject.put("icon", R.drawable.ic_baseline_notifications_24); // enter icon that exists in drawable only
 
 
 

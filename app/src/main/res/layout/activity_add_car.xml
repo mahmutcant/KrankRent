@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="Lütfen Tüm Alanları Eksiksiz Doldurun"
             android:textAlignment="center"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:text="Marka"
             android:textColor="@color/themeColor" />
         <Spinner
@@ -42,14 +42,14 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/editTextColor" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:text="Model"
             android:textColor="@color/themeColor" />
         <Spinner
@@ -57,14 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="130dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/editTextColor" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="180dp"
             android:text="Model Yılı"
             android:textColor="@color/themeColor" />
         <EditText
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="210dp"
             android:inputType="number"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/editTextColor"
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="250dp"
             android:text="Günlük Kira Bedeli"
             android:textColor="@color/themeColor" />
         <EditText
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="270dp"
             android:layout_marginRight="20dp"
             android:inputType="number"
             android:backgroundTint="@color/editTextColor"
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Araç Bulunduğunuz Şehirde Mi ? "
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="310dp"
             android:background="@color/editTextColor"
             android:layout_marginLeft="25dp"
             android:textColor="@color/themeColor" />
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="395dp"
+            android:layout_marginTop="345dp"
             android:text="Aracın Bulunduğu Şehir"
             android:textColor="@color/themeColor" />
         <Spinner
@@ -116,9 +116,25 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="420dp"
+            android:layout_marginTop="370dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/editTextColor" />
+        <ImageView
+            android:id="@+id/aracFotosu"
+            android:visibility="gone"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_baseline_image_24"
+            android:layout_marginTop="415dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:text="Aracınıza ait fotoğraf yükleyin"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="425dp"
+            android:layout_marginLeft="100dp"/>
         <Button
             android:id="@+id/aracKaydet"
             android:layout_width="match_parent"

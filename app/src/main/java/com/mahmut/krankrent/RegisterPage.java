@@ -106,6 +106,8 @@ public class RegisterPage extends AppCompatActivity {
                                 mData.put("kullaniciTel", telNo);
                                 mData.put("kullaniciID", mUser.getUid());
                                 mData.put("kullaniciAdi",kullaniciAdi);
+                                mData.put("adminMi",false);
+                                mData.put("cezaPuani",0);
                                 mReferenceUser.child("kullanicilar").child(mUser.getUid()).setValue(mData)
                                         .addOnCompleteListener(RegisterPage.this, new OnCompleteListener<Void>() {
                                             @Override

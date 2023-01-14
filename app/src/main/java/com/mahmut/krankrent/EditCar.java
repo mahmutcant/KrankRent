@@ -1,27 +1,20 @@
 package com.mahmut.krankrent;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,15 +22,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
 public class EditCar extends AppCompatActivity {
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,duzenle,favoritePage;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,duzenle,favoritePage,adminPage;
     private Button btnSec,btnAracDuzenleKaydet,btnSil;
     private CardView seciliArac;
     private Spinner myCarList;
-    private DatabaseReference mReferenceMyCar;
+    private DatabaseReference mReferenceMyCar,mReferenceUser;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private EditText txtGunlukKira;
@@ -52,6 +46,7 @@ public class EditCar extends AppCompatActivity {
         arabaDuzenle = (ImageView)findViewById(R.id.arabaDuzenle);
         arabaDuzenle.setVisibility(View.INVISIBLE);
         anaSayfa = (ImageView)findViewById(R.id.iconMainPage);
+        adminPage = (ImageView)findViewById(R.id.adminPage);
         addCarIcon = (ImageView)findViewById(R.id.addCarIcon);
         iconCikis = (ImageView)findViewById(R.id.iconCikis);
         favoritePage = (ImageView)findViewById(R.id.favoritePage);
@@ -69,6 +64,20 @@ public class EditCar extends AppCompatActivity {
         DatabaseReference mReferenceUserLoc = FirebaseDatabase.getInstance().getReference("kullanicilar")
                 .child(mUser.getUid()).child("Sehir");
         mReferenceMyCar = FirebaseDatabase.getInstance().getReference("araclar");
+        mReferenceUser = FirebaseDatabase.getInstance().getReference("kullanicilar").child(mUser.getUid());
+        mReferenceUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child("adminMi").getValue().toString() == "true"){
+                    adminPage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    adminPage.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
         seciliArac = (CardView)findViewById(R.id.seciliArac);
         seciliArac.setVisibility(View.INVISIBLE);
         txtGunlukKira.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -79,6 +88,13 @@ public class EditCar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(EditCar.this, FavoritePage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
+        adminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditCar.this, AdminSpecialPage.class));
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });
@@ -139,6 +155,14 @@ public class EditCar extends AppCompatActivity {
                                                     if(snapshot2.getKey() == myCarList.getSelectedItem()){
                                                         snapshot2.child("eskiFiyat").getRef().setValue(snapshot2.child("KiraBedeli").getValue());
                                                         snapshot2.child("KiraBedeli").getRef().setValue(Integer.parseInt(txtGunlukKira.getText().toString()));
+                                                        for(DataSnapshot snapshot3 : snapshot2.child("takibeAlanlar").getChildren()){
+                                                            if(snapshot3.getValue().toString().length() > 0){
+                                                                FcmNotificationsSender notificationsSender = new FcmNotificationsSender(snapshot3.getValue().toString()
+                                                                        ,"Takip Edilen Araç Hk.",
+                                                                        "Takip Ettiğiniz Aracın Fiyatı Değişti",getApplicationContext(),EditCar.this);
+                                                                notificationsSender.SendNotifications();
+                                                            }
+                                                        }
                                                         startActivity(new Intent(EditCar.this, LoginAfterMain.class));
                                                         overridePendingTransition(R.anim.sag, R.anim.sol);
                                                     }

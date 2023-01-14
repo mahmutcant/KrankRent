@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Mahmut Can/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/car_list.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_admin_panel_settings_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.1" />
@@ -14,8 +15,10 @@
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_home_active.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.1455" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_baseline_watch_later_24.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_emergency_exit_svgrepo_com.xml" value="0.1455" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_icons8_turkish_lira_32.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1455" />
@@ -25,8 +28,9 @@
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/mybutton.xml" value="0.254" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/drawable/myedittext.xml" value="0.1925" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_add_car.xml" value="0.28994082840236685" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_admin_special_page.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_custom_list_view.xml" value="0.2" />
-        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_edit_car.xml" value="0.5" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_edit_car.xml" value="0.4537037037037037" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_favorite_page.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_login_after_main.xml" value="0.33" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/activity_login_page.xml" value="0.3625" />
@@ -41,10 +45,12 @@
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/my_dropdown_item.xml" value="0.184375" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/my_selected_item.xml" value="0.9888888888888889" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/nav_header_sidebar.xml" value="0.2" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/popwindow.xml" value="0.2" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/spinner_list.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/layout/toolbar.xml" value="0.25" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/menu/navigation_menu.xml" value="1.3714285714285714" />
+        <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/menu/popupmenu.xml" value="1.3714285714285714" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/menu/sidebar.xml" value="0.1" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.154" />
         <entry key="..\:/Users/Mahmut Can/Desktop/KrankRent YTM/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />

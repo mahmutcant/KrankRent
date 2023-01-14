@@ -1,19 +1,19 @@
 package com.mahmut.krankrent.ui;
 
 import android.app.Activity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.provider.ContactsContract;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -26,11 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mahmut.krankrent.R;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class CarList extends ArrayAdapter<String> {
     private final List<String> aracKey;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-    private DatabaseReference mReference,mReferenceCar;
+    private DatabaseReference mReference,mReferenceCar,mReferenceLogo,mReferenceFavori;
     private HashMap<String, Object> mData;
     public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<Integer> cost, List<String> city,List<String> kiraliMi,List<String> telNo,List<String> eskiFiyat,List<String> paylasanUid,List<String> aracKey) {
         super(context, R.layout.car_list, maintitle);
@@ -65,6 +64,7 @@ public class CarList extends ArrayAdapter<String> {
         mUser = mAuth.getCurrentUser();
         mReference = FirebaseDatabase.getInstance().getReference("kullanicilar");
         mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
+        mReferenceLogo = FirebaseDatabase.getInstance().getReference("Logo");
     }
     public View getView(int position,View view,ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
@@ -75,19 +75,70 @@ public class CarList extends ArrayAdapter<String> {
         TextView carCity = (TextView)rowView.findViewById(R.id.carCity);
         ImageView btnFavori = (ImageView) rowView.findViewById(R.id.btnFavori);
         LinearLayout aracListesi = (LinearLayout)rowView.findViewById(R.id.aracListesi);
+        ImageView markaLogo = (ImageView)rowView.findViewById(R.id.MarkaLogo);
         ImageView costStatus = (ImageView)rowView.findViewById(R.id.costStatus);
         TextView txtIletisim = (TextView)rowView.findViewById(R.id.txtIletisim);
+        markaLogo.setImageResource(R.drawable.ic_baseline_watch_later_24);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mReferenceLogo.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String link = snapshot.getValue(String.class);
+                        Picasso.get().load(link).into(markaLogo);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
+            }
+        }, position*1000);
         aracListesi.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                String phone = "+90 "+ telNo.get(position);
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
-                context.startActivity(intent);
-                return false;
+                if(kiraliMi.get(position) == "false"){
+                    String phone = "+90 "+ telNo.get(position);
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                    context.startActivity(intent);
+                    return false;
+                }
+                else {
+                    Toast.makeText(context, "Bu araç Şuanda Kiralı Lütfen Kiralanma Süresi Bitince Tekrar Deneyin! ", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+        });
+        btnFavori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if(!task.isSuccessful()){
+                            Log.w("","Fail",task.getException());
+                            return;
+                        }
+                        String token = task.getResult();
+                        mReferenceCar.child(city.get(position)).child(paylasanUid.get(position)).child(aracKey.get(position)).child("takibeAlanlar")
+                                .child(mUser.getUid()).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(context,"Favori Listesine Eklendi", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        mReference.child(mUser.getUid()).child("takipListesi").child(aracKey.get(position)).setValue(aracKey.get(position)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(context, "Araç Favorilerinize Eklendi", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
         if(kiraliMi.get(position) == "true"){
-            aracListesi.setBackgroundColor(Color.parseColor("#FFCC00"));
+            aracListesi.setBackgroundColor(Color.parseColor("#cccccc"));
+            titleText.setTextColor(Color.parseColor("#202c56"));
         }else {
             aracListesi.setBackgroundColor(Color.parseColor("#edf0f7"));
         }
@@ -96,14 +147,6 @@ public class CarList extends ArrayAdapter<String> {
         carCostText.setText(cost.get(position).toString());
         carCity.setText(city.get(position));
         txtIletisim.setText("+90 "+telNo.get(position));
-        btnFavori.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mData = new HashMap<>();
-                mData.put(aracKey.get(position),aracKey.get(position));
-                mReference.child(mUser.getUid()).child("takipListesi").child(aracKey.get(position)).setValue(aracKey.get(position));
-            }
-        });
         if(eskiFiyat.get(position).length() <= 1){
             costStatus.setImageResource(R.drawable.ic_baseline_horizontal_rule_24);
         }

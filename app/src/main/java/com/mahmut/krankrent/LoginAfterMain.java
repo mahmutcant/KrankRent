@@ -1,21 +1,12 @@
 package com.mahmut.krankrent;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Icon;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,25 +19,15 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.collection.LLRBNode;
-import com.google.firebase.firestore.CollectionReference;
 import com.mahmut.krankrent.ui.CarList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 
 public class LoginAfterMain extends AppCompatActivity {
     private ListView lstAraclar;
@@ -57,7 +38,7 @@ public class LoginAfterMain extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressBar spinner;
-    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,favoritePage;
+    private ImageView anaSayfa,profileIcon,addCarIcon,arabaDuzenle,iconCikis,favoritePage,adminPage;
     private LinearLayout aracListesi;
     private TextView txtAdet;
     private int adetSayici = 1;
@@ -86,7 +67,15 @@ public class LoginAfterMain extends AppCompatActivity {
         txtAdet = (TextView)findViewById(R.id.adetSayisi);
         btnArttir = (Button)findViewById(R.id.adetArttir);
         btnAzalt = (Button)findViewById(R.id.adetAzalt);
+        adminPage = (ImageView)findViewById(R.id.adminPage);
         anaSayfa.setVisibility(View.INVISIBLE);
+        adminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAfterMain.this, AdminSpecialPage.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +126,12 @@ public class LoginAfterMain extends AppCompatActivity {
                 String myString = snapshot.child("Adi").getValue().toString();
                 String upperString = myString.substring(0, 1).toUpperCase() + myString.substring(1).toLowerCase();
                 adVer.setText(upperString);
+                if(snapshot.child("adminMi").getValue().toString() == "true"){
+                    adminPage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    adminPage.setVisibility(View.INVISIBLE);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -184,7 +179,6 @@ public class LoginAfterMain extends AppCompatActivity {
                     adetSayici-=10;
                     veriAl(adetSayici);
                     txtAdet.setText(Integer.toString(adetSayici));
-
                 }
                 return true;
             }
@@ -200,6 +194,15 @@ public class LoginAfterMain extends AppCompatActivity {
             }
         });
         mReferenceCar = FirebaseDatabase.getInstance().getReference("araclar");
+        maintitle.clear();
+        subtitle.clear();
+        cost.clear();
+        carCity.clear();
+        kiraliAraclar.clear();
+        telNo.clear();
+        eskiFiyat.clear();
+        paylasanUid.clear();
+        aracKey.clear();
         mReferenceCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -270,7 +273,7 @@ public class LoginAfterMain extends AppCompatActivity {
                             maintitle.add(snapshot1.child("Marka").getValue().toString()+" "+snapshot1.child("Model").getValue().toString()+" "+snapshot1.child("ModelYili").getValue().toString());
                             subtitle.add("İlan Sahibi : "+snapshot1.child("Paylasan").getValue().toString());
                             cost.add(Integer.parseInt(snapshot1.child("KiraBedeli").getValue().toString())*adet);
-                            carCity.add(snapshot1.child("Konum").getValue().toString() +" +90 "+snapshot1.child("iletisim").getValue().toString());
+                            carCity.add(snapshot1.child("Konum").getValue().toString());
                             kiraliAraclar.add(snapshot1.child("kiraliMi").getValue().toString());
                             telNo.add(snapshot1.child("iletisim").getValue().toString());
                             eskiFiyat.add(snapshot1.child("eskiFiyat").getValue().toString());
@@ -295,10 +298,11 @@ public class LoginAfterMain extends AppCompatActivity {
                                 maintitle.add(snp1.child("Marka").getValue().toString()+" "+snp1.child("Model").getValue().toString()+" "+snp1.child("ModelYili").getValue().toString());
                                 subtitle.add("İlan Sahibi : "+snp1.child("Paylasan").getValue().toString());
                                 cost.add(Integer.parseInt(snp1.child("KiraBedeli").getValue().toString())*adet);
-                                carCity.add(snp1.child("Konum").getValue().toString()+" +90 "+snp1.child("iletisim").getValue().toString());
+                                carCity.add(snp1.child("Konum").getValue().toString());
                                 kiraliAraclar.add(snp1.child("kiraliMi").getValue().toString());
                                 eskiFiyat.add(snp1.child("eskiFiyat").getValue().toString());
                                 paylasanUid.add(snp1.child("paylasanUid").getValue().toString());
+                                telNo.add(snp1.child("iletisim").getValue().toString());
                                 aracKey.add(snp1.getKey());
                                 CarList adapter=new CarList(LoginAfterMain.this, maintitle, subtitle,cost,carCity,kiraliAraclar,telNo,eskiFiyat,paylasanUid,aracKey);
                                 lstAraclar = (ListView)findViewById(R.id.LstAraclar);

@@ -4,6 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/anasayfa"
     tools:context=".AdminSpecialPage">
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/editTextColor"
+        app:layout_constraintHeight_percent=".75"
+        app:layout_constraintWidth_percent=".8">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="İstatistikler"
+            android:textColor="@color/themeColor"
+            android:textSize="12pt"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="İlanda Olan Araç Sayısı"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kirada Olan Araç Sayısı"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Üye Sayısı"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/txtUyeSayisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Üye Sayısı"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="160dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:id="@+id/txtKiradaArac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kirada arac"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:id="@+id/txtAracSayisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arac sayisi"
+            android:textColor="@color/themeColor"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"/>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,26 +1,20 @@
 package com.mahmut.krankrent;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.os.Vibrator;
-import android.util.Log;
-import android.widget.Toast;
+import android.window.SplashScreen;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -29,6 +23,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
      NotificationManager mNotificationManager;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
