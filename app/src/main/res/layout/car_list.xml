@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/themeColor"
-            android:text="Detaylı görüntüleme için basılı tutun"/>
+            android:text="İlan sahibini aramak için basılı tutun"/>
     </LinearLayout>
     <TextView
         android:id="@+id/carCost"

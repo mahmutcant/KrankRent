@@ -48,7 +48,9 @@ public class CarList extends ArrayAdapter<String> {
     private FirebaseAuth mAuth;
     private DatabaseReference mReference,mReferenceCar,mReferenceLogo,mReferenceFavori;
     private HashMap<String, Object> mData;
-    public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<Integer> cost, List<String> city,List<String> kiraliMi,List<String> telNo,List<String> eskiFiyat,List<String> paylasanUid,List<String> aracKey) {
+    public CarList(Activity context, List<String> maintitle,List<String> subtitle, List<Integer> cost,
+                   List<String> city,List<String> kiraliMi,List<String> telNo,List<String> eskiFiyat,List<String> paylasanUid,
+                   List<String> aracKey) {
         super(context, R.layout.car_list, maintitle);
         this.context=context;
         this.maintitle=maintitle;

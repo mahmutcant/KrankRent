@@ -119,6 +119,13 @@ public class ProfilePage extends AppCompatActivity {
                 overridePendingTransition(R.anim.sag, R.anim.sol);
             }
         });
+        btnVazgec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfilePage.this, LoginAfterMain.class));
+                overridePendingTransition(R.anim.sag, R.anim.sol);
+            }
+        });
         arabaDuzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
